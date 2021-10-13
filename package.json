@@ -1,0 +1,21 @@
+{
+  "name": "wa-web",
+  "version": "1.0.0",
+  "description": "wa test",
+  "main": "app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "oke",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "mongodb": "^4.1.2",
+    "node-firebird": "^0.9.9",
+    "qrcode": "^1.4.4",
+    "qrcode-terminal": "^0.12.0",
+    "socket.io": "^4.2.0",
+    "whatsapp-web.js": "github:tuyuribr/whatsapp-web.js#patch-6"
+  }
+}

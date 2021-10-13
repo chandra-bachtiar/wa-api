@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Whatapp API || Chand</title>
+   </head>
+   <body>
+      <h2>Made With Love!</h2>
+      <section>
+          <div id="qr-div" style="display: flex;flex-direction: column;">
+         <label for="" style="width: 200px;text-align: center;">Scan Me!</label>
+         <img src="" id="qr-image" alt="QR For Whatsapp" style="width: 200px;height: 200px;"/>
+        </div>
+      </section>
+      <section>
+         <div class="header">
+            <form action="/sendMessage" method="POST">
+               <div style="display: flex; flex-direction: column">
+                  <label for="">Nomor Hp</label>
+                  <input type="text" style="width: 200px" name="number"/>
+                  <label for="">Masukan Pesan</label>
+                  <textarea id="textValue" name="textValue" style="width: 200px; height: 100px"></textarea>
+                  <button style="width: 50px; margin-top: 10px" type="submit">Kirim!</button>
+               </div>
+            </form>
+         </div>
+      </section>
+      <script
+         src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.min.js"
+         integrity="sha512-2hIBfT6wur46uR5ayhmyICuA8s15BvJhagB+jZImgktQAy832P7EuY8njl1HGp4YS0Sk8DXRo9dByhvD3jfDxA=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+      ></script>
+      <script type="text/javascript">
+         document.addEventListener("DOMContentLoaded", function (event) {
+            let socket = io.connect('http://chand.my.id:8080',{path: '/socket.io'});
+            socket.on('message',function(x) {
+                console.log(x);
+                if(x == 'QR Code Ready!' || x == 'Menyambungkan...') {
+                    document.querySelector('.header').style.display = 'none';
+                    document.querySelector('#qr-div').style.display = 'flex';
+                } else if(x == 'Whatsapp Client Ready to Use!') {
+                    document.querySelector('#qr-div').style.display = 'none';
+                    document.querySelector('.header').style.display = '';
+
+                }
+            });
+            socket.on('qr',function(y) {
+                document.querySelector('#qr-image').setAttribute('src',y);
+            })
+         });
+      </script>
+   </body>
+</html>
